@@ -1,0 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+#define TWO 2
+struct ListNode* createnode(int count,struct ListNode* temp){
+    temp=(struct ListNode*)calloc(1,sizeof(struct ListNode));
+    temp->val=count;
+    return temp;
+}
+struct ListNode* mergeNodes(struct ListNode* head){
+
+    struct ListNode *ans=0,*temp=0;
+    int zero=0,count=0;
+    while(head!=NULL){
+
+        if(head->val==0)zero++;
+         count=count+head->val;
+        if(zero==TWO){
+            if(ans==NULL){
+                ans=createnode(count,ans);
+                temp=ans;
+                count=0;
+                zero--;
+            }
+            else{
+                temp->next=createnode(count,temp);
+                temp=temp->next;
+                count=0;
+                zero--;
+            }
+        }
+        
+        head=head->next;
+    }
+    return ans;
+}
