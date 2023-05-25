@@ -1,0 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+struct ListNode* mem(int data){
+    struct ListNode *temp=0;
+    temp=(struct ListNode*)calloc(1,sizeof(struct ListNode));
+    temp->val=data;
+
+    return temp;
+}
+struct ListNode* oddEvenList(struct ListNode* head){
+
+struct ListNode *odd=0,*even=0,*temp1=0,*temp2=0;
+int count=1;
+if(head){
+    while(head!=NULL){
+
+        if(count%2!=0){
+            if(odd==NULL){
+                odd=mem(head->val);
+                temp1=odd;
+            }
+            else{
+                temp1->next=mem(head->val);
+                temp1=temp1->next;
+            }
+        }
+        else{
+            if(even==NULL){
+                even=mem(head->val);
+                temp2=even;
+            }
+            else{
+                temp2->next=mem(head->val);
+                temp2=temp2->next;
+            }
+        }
+        count++;
+        head=head->next;
+    }
+temp1->next=even;
+head=odd;
+}
+return head;
+}
